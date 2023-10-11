@@ -20,11 +20,15 @@ namespace Full_GRASP_And_SOLID
         {
             PopulateCatalogs();
 
+            //Las recetas ahora crean y agregan los steps a la receta, ya que es su responsabilidad contener las instancias de step
             Recipe recipe = new Recipe();
             recipe.FinalProduct = GetProduct("Café con leche");
-            recipe.AddStep(new Step(GetProduct("Café"), 100, GetEquipment("Cafetera"), 120));
-            recipe.AddStep(new Step(GetProduct("Leche"), 200, GetEquipment("Hervidor"), 60));
+            //recipe.AddStep(new Step(GetProduct("Café"), 100, GetEquipment("Cafetera"), 120));
+            recipe.AddStep(GetProduct("Café"), 200, GetEquipment("Cafetera"), 120);
+            //recipe.AddStep(new Step(GetProduct("Leche"), 200, GetEquipment("Hervidor"), 60));
+            recipe.AddStep(GetProduct("Leche"), 200, GetEquipment("Hervidor"), 60);
 
+            //Solo necesito una impresora, entonces no aplico patrón Creator e instancio una vez la impresora que utilizo
             IPrinter printer;
             printer = new ConsolePrinter();
             printer.PrintRecipe(recipe);
